@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/**/*.js"
+    "lint": "eslint ./client/**/*.js"
   },
   "devDependencies": {
     "eslint": "^5.4.0",

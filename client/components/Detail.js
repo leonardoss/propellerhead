@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import CustomPaper from './Widgets/CustomPaper';
 
 // material-ui
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -16,16 +16,7 @@ import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 
-const querystring = require('querystring');
-
 const styles = theme => ({
-  root: {
-    marginTop: 20,
-    paddingTop: theme.spacing.unit * 4,
-    paddingBottom: theme.spacing.unit * 4,
-    paddingLeft: 40,
-    paddingRight: 100,
-  },
   button: {
     position: 'absolute',
     bottom: theme.spacing.unit * 2,
@@ -74,6 +65,7 @@ class Detail extends Component {
     this.handleCloseSnack = this.handleCloseSnack.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.insertCard = this.insertCard.bind(this);
   }
 
   componentDidMount() {
@@ -96,9 +88,9 @@ class Detail extends Component {
       });
   }
 
-  insertCard(comp) {
-    const temp = comp.state.cards;
-    temp.push({ text: comp.state.textCard });
+  insertCard() {
+    const temp = this.state.cards;
+    temp.push({ text: this.state.textCard });
 
     axios.post('/update',
       {
@@ -109,10 +101,10 @@ class Detail extends Component {
           'Content-Type': 'application/json',
         },
       }).then(function(response) {
-      comp.setState({
+      this.setState({
         msg: response.data
       });
-      comp.handleOpenSnack();
+      this.handleOpenSnack();
     });
   }
 
@@ -147,21 +139,7 @@ class Detail extends Component {
     const { vertical, horizontal, openSnack } = this.state;
     return (
       <div>
-        <Paper className={classes.root} elevation={1}>
-          <Typography variant="headline" component="h3">{this.state.data.name}</Typography>
-          <br />
-          <Typography variant="body2" gutterBottom>Email</Typography>
-          <Typography variant="subheading">{this.state.data.email}</Typography>
-          <br />
-          <Typography variant="body2" gutterBottom>ID</Typography>
-          <Typography variant="subheading">{this.state.data._id}</Typography>
-          <br />
-          <Typography variant="body2" gutterBottom>Status</Typography>
-          <Typography variant="subheading">{this.state.data.status}</Typography>
-          <br />
-          <Typography variant="body2" gutterBottom>Creation Date</Typography>
-          <Typography variant="subheading">{this.state.data.creationDate}</Typography>
-        </Paper>
+        <CustomPaper data={this.state.data} />
         <Divider />
         {this.state.msg !== '' && <Snackbar anchorOrigin={{ vertical, horizontal }} open={openSnack} onClose={this.handleCloseSnack} ContentProps={{ 'aria-describedby': 'message-id' }} message={<span id="message-id">{this.state.msg}</span>}/>}
         {this.state.cards.map((row, i) => {

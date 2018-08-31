@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import TableCustom from './Table';
 
-class App extends Component {
+class Home extends Component {
   constructor() {
     super();
     this.state = { data: [] };
@@ -13,10 +13,10 @@ class App extends Component {
     this.getData(this);
   }
 
-  getData(ev) {
+  getData() {
     axios.get('/getUsers')
       .then((response) => {
-        ev.setState({ data: response.data });
+        this.setState({ data: response.data });
       });
   }
 
@@ -31,4 +31,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;

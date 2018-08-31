@@ -11,14 +11,14 @@ Application created to Developer Technical Test of Propellerhead
 ##### Versions
 * Node - 8.9.4
 
-Install dependencies
+With Docker installed
 ```
-$ npm install
+$ docker-compose up --build
 ```
 
-Run the project
+The application will be avaible on
 ```
-$ npm start
+http://localhost:8001
 ```
 
 ## TODO

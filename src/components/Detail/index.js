@@ -6,16 +6,19 @@ import CustomModal from '../Widgets/CustomModal';
 
 // material-ui
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Snackbar from '@material-ui/core/Snackbar';
 
 const styles = theme => ({
+  root: {
+    margin: '30px 0 0 0',
+  },
   button: {
     position: 'absolute',
     bottom: theme.spacing.unit * 2,
@@ -123,19 +126,26 @@ class Detail extends Component {
     const { classes } = this.props;
     const { vertical, horizontal, openSnack } = this.state;
     return (
-      <div>
-        <CustomPaper data={this.state.data} />
-        <Divider />
+      <div className={classes.root}>
+        <Grid container spacing={24}>
+          <Grid item xs={6}>
+            <Typography variant="headline" component="h3">Customer details</Typography>
+            <CustomPaper data={this.state.data} />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="headline" component="h3">Customer cards</Typography>
+            {this.state.cards.map((row, i) => {
+              return (
+                <Card className={classes.card} key={i}>
+                  <CardContent>
+                    <Typography variant="headline" component="h3">{row.text}</Typography>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </Grid>
+        </Grid>
         {this.state.msg !== '' && <Snackbar anchorOrigin={{ vertical, horizontal }} open={openSnack} onClose={this.handleCloseSnack} ContentProps={{ 'aria-describedby': 'message-id' }} message={<span id="message-id">{this.state.msg}</span>}/>}
-        {this.state.cards.map((row, i) => {
-          return (
-            <Card className={classes.card} key={i}>
-              <CardContent>
-                <Typography variant="headline" component="h3">{row.text}</Typography>
-              </CardContent>
-            </Card>
-          );
-        })}
         <Tooltip title="Add Note">
           <Button variant="fab" color="secondary" className={classes.button} onClick={this.handleOpen}>
             <AddIcon />

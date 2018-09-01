@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import CustomPaper from './Widgets/CustomPaper';
+import CustomPaper from '../Widgets/CustomPaper';
+import CustomModal from '../Widgets/CustomModal';
 
 // material-ui
 import { withStyles } from '@material-ui/core/styles';
@@ -12,8 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Modal from '@material-ui/core/Modal';
-import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 
 const styles = theme => ({
@@ -22,26 +21,12 @@ const styles = theme => ({
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2,
   },
-  paper: {
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  },
   card: {
     width: '40%',
     float: 'left',
     margin: '10px',
     paddingBottom: theme.spacing.unit * 2,
-  },
-  modal: {
-    position: 'absolute',
-    width: theme.spacing.unit * 50,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-  },
+  }
 });
 
 class Detail extends Component {
@@ -88,7 +73,7 @@ class Detail extends Component {
       });
   }
 
-  insertCard() {
+  insertCard(comp) {
     const temp = this.state.cards;
     temp.push({ text: this.state.textCard });
 
@@ -101,10 +86,10 @@ class Detail extends Component {
           'Content-Type': 'application/json',
         },
       }).then(function(response) {
-      this.setState({
+      comp.setState({
         msg: response.data
       });
-      this.handleOpenSnack();
+      comp.handleOpenSnack();
     });
   }
 
@@ -156,45 +141,13 @@ class Detail extends Component {
             <AddIcon />
           </Button>
         </Tooltip>
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={this.state.openModal}
-          onClose={this.handleClose}
-        >
-          <div className={classes.modal}>
-            <form className={classes.container} noValidate autoComplete="off">
-              <Typography variant="title" id="modal-title">
-                Insert a new note
-              </Typography>
-              <Divider />
-              <TextField
-                id="multiline-static"
-                label="type"
-                multiline
-                rows="4"
-                defaultValue=""
-                className={classes.textField}
-                margin="normal"
-                fullWidth
-                name="textCard"
-                value={this.state.text}
-                onChange={this.handleInputChange}
-              />
-              <br />
-              <br />
-              <br />
-              <Button
-                variant="contained"
-                color="secondary"
-                className={classes.button}
-                onClick={this.onClickSave}
-              >
-                Save
-              </Button>
-            </form>
-          </div>
-        </Modal>
+        <CustomModal 
+          openModal={this.state.openModal} 
+          handleInputChange={this.handleInputChange}
+          handleClose={this.handleClose}
+          onClickSave={this.onClickSave}
+          text={this.state.text}
+        />
       </div>
     );
   }

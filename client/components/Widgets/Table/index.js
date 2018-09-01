@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
+//utils
+import { formatDate } from '../../../helpers/utils';
+
 //material-ui
 import TableUI from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,6 +15,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 
 class Table extends Component {
+
   render() {
     return (
       <TableUI>
@@ -31,7 +35,7 @@ class Table extends Component {
               <TableRow key={row._id}>
                 <TableCell component="th" scope="row">{row._id}</TableCell>
                 <TableCell>{row.status}</TableCell>
-                <TableCell numeric>{row.creationDate}</TableCell>
+                <TableCell>{formatDate(row.creationDate)}</TableCell>
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.email}</TableCell>
                 <TableCell><Link to= {`/user/${row._id}`}>Details</Link></TableCell>

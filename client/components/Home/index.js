@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import TableCustom from './Table';
+import TableCustom from '../Widgets/Table';
 
 class Home extends Component {
   constructor() {

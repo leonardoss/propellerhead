@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+//utils
+import { formatDate } from '../../helpers/utils';
+
 // material-ui
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -33,7 +36,7 @@ class CustomPaper extends Component {
         <Typography variant="subheading">{this.props.data.status}</Typography>
         <br />
         <Typography variant="body2" gutterBottom>Creation Date</Typography>
-        <Typography variant="subheading">{this.props.data.creationDate}</Typography>
+        <Typography variant="subheading">{formatDate(this.props.data.creationDate)}</Typography>
       </Paper>
     );
   }

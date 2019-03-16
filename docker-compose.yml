@@ -1,9 +1,9 @@
 version: '3'
 services:
 
-  propellerhead:
-    container_name: propellerhead
-    image: propellerhead
+  edirect:
+    eontainer_name: Edirect
+    emage: Edirect
     build: .
     ports:
       - "8001:8000"

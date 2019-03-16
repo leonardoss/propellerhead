@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 //utils
-import { formatDate } from '../../../helpers/utils';
+// import { formatDate } from '../../../helpers/utils';
 
 //material-ui
 import TableUI from '@material-ui/core/Table';
@@ -15,7 +15,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 
 class Table extends Component {
-
   render() {
     return (
       <TableUI>
@@ -26,19 +25,22 @@ class Table extends Component {
             <TableCell numeric>Creation Date</TableCell>
             <TableCell>Nome</TableCell>
             <TableCell>Email</TableCell>
-            <TableCell></TableCell>
+            <TableCell />
           </TableRow>
         </TableHead>
         <TableBody>
           {this.props.users.map(row => {
             return (
               <TableRow key={row._id}>
-                <TableCell component="th" scope="row">{row._id}</TableCell>
+                <TableCell component="th" scope="row">
+                  {row._id}
+                </TableCell>
                 <TableCell>{row.status}</TableCell>
-                <TableCell>{formatDate(row.creationDate)}</TableCell>
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.email}</TableCell>
-                <TableCell><Link to= {`/user/${row._id}`}>Details</Link></TableCell>
+                <TableCell>
+                  <Link to={`/user/${row._id}`}>Details</Link>
+                </TableCell>
               </TableRow>
             );
           })}
@@ -49,15 +51,11 @@ class Table extends Component {
 }
 
 Table.propTypes = {
-  users: PropTypes.array
+  users: PropTypes.array,
 };
 
 Table.defaultProps = {
-  users: []
+  users: [],
 };
 
 export default Table;
-
-
-
-

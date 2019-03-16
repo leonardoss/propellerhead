@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import TableCustom from '../Widgets/Table';
+import TableCustom from '../../components/Widgets/Table';
 
 // material-ui
 import { withStyles } from '@material-ui/core/styles';
@@ -25,10 +25,9 @@ class Home extends Component {
   }
 
   getData() {
-    axios.get('/getUsers')
-      .then((response) => {
-        this.setState({ data: response.data });
-      });
+    axios.get('/getUsers').then(response => {
+      this.setState({ data: response.data });
+    });
   }
 
   render() {
@@ -37,10 +36,10 @@ class Home extends Component {
       <div className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs={6}>
-            <Typography variant="headline" component="h3">Customers</Typography>
-            <TableCustom
-              users={this.state.data}
-            />
+            <Typography variant="headline" component="h3">
+              Customers
+            </Typography>
+            <TableCustom users={this.state.data} />
           </Grid>
         </Grid>
       </div>

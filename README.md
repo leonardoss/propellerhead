@@ -1,6 +1,6 @@
-# Propellerhead
+# Edirect
 
-Application created to Developer Technical Test of Propellerhead
+Application created to Developer Technical Test of Edirect
 ##### Application created based on
 - [Create React App][df-create-react-app]
 - [MongoDB][df-mongodb]
@@ -53,7 +53,7 @@ $ npm test
 I've just made one test file. In the current status of the app i had few pure functions.
 Nest step will SnapShots tests and extend to all the components.
 
-##### CSS 
+##### CSS
 I did not feel the need to use CSS, MaterialUI gave me all the necessary components
 
 ##### Structure

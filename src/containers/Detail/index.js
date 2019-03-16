@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import CustomPaper from '../Widgets/CustomPaper';
-import CustomModal from '../Widgets/CustomModal';
+import CustomPaper from '../../components/Widgets/CustomPaper';
+import CustomModal from '../../components/Widgets/CustomModal';
 
 // material-ui
 import { withStyles } from '@material-ui/core/styles';
@@ -29,7 +29,7 @@ const styles = theme => ({
     float: 'left',
     margin: '10px',
     paddingBottom: theme.spacing.unit * 2,
-  }
+  },
 });
 
 class Detail extends Component {
@@ -65,7 +65,8 @@ class Detail extends Component {
   }
 
   getData(comp) {
-    axios.get('/getUsers?id=' + this.props.match.params.id)
+    axios
+      .get('/getUsers?id=' + this.props.match.params.id)
       .then(function(response) {
         response.data.map(row => {
           comp.setState({
@@ -80,20 +81,25 @@ class Detail extends Component {
     const temp = this.state.cards;
     temp.push({ text: this.state.textCard });
 
-    axios.post('/update',
-      {
-        _id: this.props.match.params.id,
-        cards: temp,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
+    axios
+      .post(
+        '/update',
+        {
+          _id: this.props.match.params.id,
+          cards: temp,
         },
-      }).then(function(response) {
-      comp.setState({
-        msg: response.data
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .then(function(response) {
+        comp.setState({
+          msg: response.data,
+        });
+        comp.handleOpenSnack();
       });
-      comp.handleOpenSnack();
-    });
   }
 
   handleOpen() {
@@ -118,7 +124,7 @@ class Detail extends Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
@@ -129,30 +135,49 @@ class Detail extends Component {
       <div className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs={6}>
-            <Typography variant="headline" component="h3">Customer details</Typography>
+            <Typography variant="headline" component="h3">
+              Customer details
+            </Typography>
             <CustomPaper data={this.state.data} />
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="headline" component="h3">Customer cards</Typography>
+            <Typography variant="headline" component="h3">
+              Customer cards
+            </Typography>
             {this.state.cards.map((row, i) => {
               return (
                 <Card className={classes.card} key={i}>
                   <CardContent>
-                    <Typography variant="headline" component="h3">{row.text}</Typography>
+                    <Typography variant="headline" component="h3">
+                      {row.text}
+                    </Typography>
                   </CardContent>
                 </Card>
               );
             })}
           </Grid>
         </Grid>
-        {this.state.msg !== '' && <Snackbar anchorOrigin={{ vertical, horizontal }} open={openSnack} onClose={this.handleCloseSnack} ContentProps={{ 'aria-describedby': 'message-id' }} message={<span id="message-id">{this.state.msg}</span>}/>}
+        {this.state.msg !== '' && (
+          <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            open={openSnack}
+            onClose={this.handleCloseSnack}
+            ContentProps={{ 'aria-describedby': 'message-id' }}
+            message={<span id="message-id">{this.state.msg}</span>}
+          />
+        )}
         <Tooltip title="Add Note">
-          <Button variant="fab" color="secondary" className={classes.button} onClick={this.handleOpen}>
+          <Button
+            variant="fab"
+            color="secondary"
+            className={classes.button}
+            onClick={this.handleOpen}
+          >
             <AddIcon />
           </Button>
         </Tooltip>
-        <CustomModal 
-          openModal={this.state.openModal} 
+        <CustomModal
+          openModal={this.state.openModal}
           handleInputChange={this.handleInputChange}
           handleClose={this.handleClose}
           onClickSave={this.onClickSave}
@@ -164,7 +189,7 @@ class Detail extends Component {
 }
 
 Detail.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Detail);

@@ -1,5 +1,5 @@
 {
-  "name": "propellerhead",
+  "name": "edirect",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,7 +14,6 @@
     "jest-cli": "^24.5.0",
     "material-ui": "^0.20.2",
     "material-ui-icons": "^1.0.0-beta.36",
-    "moment": "^2.22.2",
     "mongoose": "^5.4.19",
     "nodemon": "^1.18.3",
     "prop-types": "^15.6.2",

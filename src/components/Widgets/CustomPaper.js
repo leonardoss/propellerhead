@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 //utils
-import { formatDate } from '../../helpers/utils';
+// import { formatDate } from '../../helpers/utils';
 
 // material-ui
 import { withStyles } from '@material-ui/core/styles';
@@ -16,7 +16,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 4,
     paddingLeft: 40,
     paddingRight: 100,
-  }
+  },
 });
 
 class CustomPaper extends Component {
@@ -24,26 +24,35 @@ class CustomPaper extends Component {
     const { classes } = this.props;
     return (
       <Paper className={classes.root} elevation={1}>
-        <Typography variant="headline" component="h3">{this.props.data.name}</Typography>
+        <Typography variant="headline" component="h3">
+          {this.props.data.name}
+        </Typography>
         <br />
-        <Typography variant="body2" gutterBottom>Email</Typography>
+        <Typography variant="body2" gutterBottom>
+          Email
+        </Typography>
         <Typography variant="subheading">{this.props.data.email}</Typography>
         <br />
-        <Typography variant="body2" gutterBottom>ID</Typography>
+        <Typography variant="body2" gutterBottom>
+          ID
+        </Typography>
         <Typography variant="subheading">{this.props.data._id}</Typography>
         <br />
-        <Typography variant="body2" gutterBottom>Status</Typography>
+        <Typography variant="body2" gutterBottom>
+          Status
+        </Typography>
         <Typography variant="subheading">{this.props.data.status}</Typography>
         <br />
-        <Typography variant="body2" gutterBottom>Creation Date</Typography>
-        <Typography variant="subheading">{formatDate(this.props.data.creationDate)}</Typography>
+        <Typography variant="body2" gutterBottom>
+          Creation Date
+        </Typography>
       </Paper>
     );
   }
 }
 
 CustomPaper.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(CustomPaper);

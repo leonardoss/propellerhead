@@ -14,22 +14,18 @@ ReactDOM.render(
   <HashRouter>
     <div>
       <CssBaseline />
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
-          <AppBar position="static">
-            <Toolbar>
-              <Typography variant="title" color="inherit">
-                Propellerhead - Leonardo Silva - Developer Technical Test
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <br />
-          <Routes />
+      <Grid container direction="row" justify="center" alignItems="center">
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              Propellerhead - Leonardo Silva - Developer Technical Test
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <br />
+        <Routes />
       </Grid>
     </div>
-  </HashRouter>, document.getElementById('root')
+  </HashRouter>,
+  document.getElementById('root'),
 );

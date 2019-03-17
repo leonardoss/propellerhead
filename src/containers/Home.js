@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import TableCustom from '../../components/Widgets/Table';
+import Layout from '../layout';
+import TableCustom from '../components/Widgets/Table';
 
 // material-ui
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { Grid, withStyles, Typography } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -17,32 +16,30 @@ class Home extends Component {
   constructor() {
     super();
     this.state = { data: [] };
-    this.getData = this.getData.bind(this);
   }
 
-  componentDidMount() {
-    this.getData(this);
-  }
-
-  getData() {
+  getData = () => {
     axios.get('/getUsers').then(response => {
       this.setState({ data: response.data });
     });
-  }
+  };
+
+  componentDidMount = () => {
+    this.getData(this);
+  };
 
   render() {
-    const { classes } = this.props;
     return (
-      <div className={classes.root}>
-        <Grid container spacing={24}>
-          <Grid item xs={6}>
+      <Layout>
+        <Grid container direction="column" alignItems="center" justify="center">
+          <Grid item xs={8}>
             <Typography variant="headline" component="h3">
               Customers
             </Typography>
             <TableCustom users={this.state.data} />
           </Grid>
         </Grid>
-      </div>
+      </Layout>
     );
   }
 }

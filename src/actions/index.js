@@ -1,4 +1,11 @@
-import { ADD_USER, REMOVE_USER } from './actionTypes';
+import { ADD_USER, REMOVE_USER, IS_AUTHENTICATED } from './actionTypes';
+
+export function isAuthenticated(user) {
+  return {
+    type: IS_AUTHENTICATED,
+    user: user,
+  };
+}
 
 export function addUser(value) {
   return {

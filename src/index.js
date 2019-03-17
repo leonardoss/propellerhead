@@ -5,13 +5,27 @@ import Routes from './routes/index';
 import { Provider } from 'react-redux';
 import { Store } from './store';
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import primaryColor from '@material-ui/core/colors/blue';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 import './styles/init.scss';
+
+const ThemeUi = createMuiTheme({
+  palette: {
+    primary: primaryColor,
+  },
+});
 
 const App = () => (
   <Provider store={Store}>
-    <Router>
-      <Routes />
-    </Router>
+    <MuiThemeProvider theme={ThemeUi}>
+      <CssBaseline>
+        <Router>
+          <Routes />
+        </Router>
+      </CssBaseline>
+    </MuiThemeProvider>
   </Provider>
 );
 

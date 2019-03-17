@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import CustomPaper from '../../components/Widgets/CustomPaper';
-import CustomModal from '../../components/Widgets/CustomModal';
+import Layout from '../layout';
+import CustomPaper from '../components/Widgets/CustomPaper';
+import CustomModal from '../components/Widgets/CustomModal';
 
 // material-ui
 import { withStyles } from '@material-ui/core/styles';
@@ -132,7 +133,7 @@ class Detail extends Component {
     const { classes } = this.props;
     const { vertical, horizontal, openSnack } = this.state;
     return (
-      <div className={classes.root}>
+      <Layout>
         <Grid container spacing={24}>
           <Grid item xs={6}>
             <Typography variant="headline" component="h3">
@@ -183,7 +184,7 @@ class Detail extends Component {
           onClickSave={this.onClickSave}
           text={this.state.text}
         />
-      </div>
+      </Layout>
     );
   }
 }

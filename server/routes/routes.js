@@ -17,17 +17,6 @@ router.route('/update').post(function(req, res) {
   });
 });
 
-// router.get('/getProjects', function(req, res) {
-//   const query = req.query.id ? { $and: [{ _id: req.query.id }] } : {};
-
-//   Users.find(query, function(err, user) {
-//     console.log('getProjects - projects', user);
-//     console.log('getProjects - projects', user.projects);
-//     if (err) res.send(err);
-//     res.json(user.projects);
-//   });
-// });
-
 router.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;

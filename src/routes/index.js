@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as actions from '../actions';

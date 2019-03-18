@@ -27,7 +27,7 @@ const styles = theme => ({
   },
 });
 
-class CustomModal extends Component {
+class CustomModal extends React.Component {
   render() {
     const { classes } = this.props;
     return (

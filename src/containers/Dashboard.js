@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -6,37 +6,23 @@ import * as actions from '../actions';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Layout from '../layout';
-import CustomModal from '../components/Widgets/CustomModal';
 
 // material-ui
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import AddIcon from '@material-ui/icons/Add';
-import Button from '@material-ui/core/Button';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Snackbar from '@material-ui/core/Snackbar';
+import { Grid, Typography } from '@material-ui/core';
+
+import CustomModal from '../components/Widgets/CustomModal';
+import CustomSnackBar from '../components/Widgets/CustomSnackBar';
+import CustomTooltip from '../components/Widgets/CustomTooltip';
+import ProjectCard from '../components/Widgets/ProjectCard';
 
 const styles = theme => ({
   root: {
     margin: '30px 0 0 0',
   },
-  button: {
-    position: 'absolute',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 2,
-  },
-  card: {
-    width: '40%',
-    float: 'left',
-    margin: '10px',
-    paddingBottom: theme.spacing.unit * 2,
-  },
 });
 
-class Dashboard extends Component {
+class Dashboard extends React.Component {
   constructor(props) {
     super();
     this.state = {
@@ -47,8 +33,6 @@ class Dashboard extends Component {
       msg: '',
       user: props.user,
       projects: props.user.projects,
-      vertical: 'bottom',
-      horizontal: 'center',
     };
   }
 
@@ -108,12 +92,6 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const { vertical, horizontal, openSnack } = this.state;
-
-    console.log('this.state', this.state);
-    console.log('this.props', this.props);
-    console.log('this.props.user.projects', this.props.user.projects);
     return (
       <Layout>
         <Grid container direction="column" alignItems="center" justify="center">
@@ -121,36 +99,17 @@ class Dashboard extends Component {
             <Typography variant="headline" component="h3">
               Projects
             </Typography>
-            {this.state.projects.map((item, i) => {
-              return (
-                <Card className={classes.card} key={i}>
-                  <CardContent>
-                    <Typography variant="headline" component="h3">
-                      {item.title}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              );
-            })}
+            {this.state.projects.map((item, i) => (
+              <ProjectCard item={item} key={i} />
+            ))}
             {this.state.msg !== '' && (
-              <Snackbar
-                anchorOrigin={{ vertical, horizontal }}
-                open={openSnack}
-                onClose={this.handleCloseSnack}
-                ContentProps={{ 'aria-describedby': 'message-id' }}
-                message={<span id="message-id">{this.state.msg}</span>}
+              <CustomSnackBar
+                openSnack={this.state.openSnack}
+                handleCloseSnack={this.handleCloseSnack}
+                msg={this.state.msg}
               />
             )}
-            <Tooltip title="Add Note">
-              <Button
-                variant="fab"
-                color="secondary"
-                className={classes.button}
-                onClick={this.handleOpen}
-              >
-                <AddIcon />
-              </Button>
-            </Tooltip>
+            <CustomTooltip handleOpen={this.handleOpen} />
             <CustomModal
               openModal={this.state.openModal}
               handleInputChange={this.handleInputChange}

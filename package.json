@@ -31,7 +31,7 @@
     "dev": "npm run webpack-dev && nodemon --exec babel-node -- bin/www",
     "start": "npm run webpack && nodemon --exec babel-node -- bin/www",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts eject",
     "lint": "eslint ./src/**/*.js"
   },

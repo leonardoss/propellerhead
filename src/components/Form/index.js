@@ -7,8 +7,8 @@ import Feedback from './FormFeedback/FormFeedback';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { isEmpty } from '../../helpers/utils';
-import withStyles from '@material-ui/core/styles/withStyles';
 
+import withStyles from '@material-ui/core/styles/withStyles';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import {
   Typography,

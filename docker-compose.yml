@@ -2,8 +2,8 @@ version: '3'
 services:
 
   edirect:
-    eontainer_name: Edirect
-    emage: Edirect
+    container_name: Edirect
+    image: Edirect
     build: .
     ports:
       - "8001:8000"

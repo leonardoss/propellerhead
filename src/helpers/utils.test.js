@@ -1,14 +1,11 @@
-import { formatDate } from './utils';
+import { isEmpty } from './utils';
 
-let arr = [
-  '',
-  '2018-08-24T10:32:00.000'
-];
-
-test('date is empty', () => {
-    expect(formatDate(arr[0])).toMatch("Invalid date");
+test('obj is empty', () => {
+  const obj = {};
+  expect(isEmpty(obj)).toBe(true);
 });
 
-test('date valid', () => {
-  expect(formatDate(arr[1])).not.toMatch("Invalid date");
+test('obj is NOT empty', () => {
+  const obj = { test: 'test' };
+  expect(isEmpty(obj)).toBe(false);
 });

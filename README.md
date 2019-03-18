@@ -71,3 +71,9 @@ Maybe separate in two applications: Client/Server
    [df-docker]: <https://www.docker.com>
    [df-jest]: <https://jestjs.io>
 
+   ------
+
+
+   - remove/add dockerfile
+
+

@@ -19,13 +19,29 @@ class Home extends Component {
   }
 
   getData = () => {
-    axios.get('/getUsers').then(response => {
-      this.setState({ data: response.data });
-    });
+    axios
+      .post(
+        '/update',
+        {
+          _id: this.props.match.params.id,
+          cards: temp,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .then(function(response) {
+        comp.setState({
+          msg: response.data,
+        });
+        comp.handleOpenSnack();
+      });
   };
 
   componentDidMount = () => {
-    this.getData(this);
+    // this.getData(this);
   };
 
   render() {

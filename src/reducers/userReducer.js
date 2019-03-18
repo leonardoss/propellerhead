@@ -5,7 +5,8 @@ import {
 } from '../actions/actionTypes';
 
 const initialState = {
-  user: false,
+  user: {},
+  authenticated: false,
 };
 
 export default function UsersReducer(state = initialState, action) {
@@ -14,6 +15,7 @@ export default function UsersReducer(state = initialState, action) {
       return {
         ...state,
         user: action.user,
+        authenticated: true,
       };
     // case ADD_USER:
     //   return {

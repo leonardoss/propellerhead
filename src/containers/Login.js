@@ -16,7 +16,7 @@ class Login extends React.Component {
     return (
       <Layout>
         <Grid container direction="column" alignItems="center" justify="center">
-          <Grid item xs={3}>
+          <Grid item xs={11} md={5}>
             <Form />
           </Grid>
         </Grid>

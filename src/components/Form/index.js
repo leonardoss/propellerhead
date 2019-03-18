@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import * as actions from '../../actions';
 import Feedback from './FormFeedback/FormFeedback';
 import { withRouter } from 'react-router-dom';
-
+import axios from 'axios';
+import { isEmpty } from '../../helpers/utils';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import LockIcon from '@material-ui/icons/LockOutlined';
@@ -119,21 +120,42 @@ class Form extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.username === 'admin' && this.state.password === 'admin') {
-      const userInfo = {
-        displayName: 'Leonardo',
-        email: 'leonardo@santopixel.com.br',
-      };
-      console.log('this.props', this.props);
-      this.props.isAuthenticated(userInfo);
-      this.props.history.push('/home');
-    } else {
-      this.setState({
-        errors: {
-          ...this.state.errors,
-          general: 'Invalid credentials',
+
+    axios
+      .post(
+        '/login',
+        {
+          email: this.state.username,
+          password: this.state.password,
         },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .then(response => {
+        const userInfo = {
+          id: response.data.user.id,
+          displayName: response.data.user.name,
+          email: response.data.user.email,
+          projects: response.data.user.projects,
+        };
+        this.props.isAuthenticated(userInfo);
+      })
+      .catch(error => {
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            general: 'Invalid credentials',
+          },
+        });
       });
+  };
+
+  componentWillReceiveProps = (newProps, nextContext) => {
+    if (!isEmpty(newProps.user)) {
+      this.props.history.push('/dashboard');
     }
   };
 
@@ -145,7 +167,7 @@ class Form extends React.Component {
         <Avatar className={classes.avatar}>
           <LockIcon />
         </Avatar>
-        <Typography variant="subheading">Please, log-in</Typography>
+        <Typography variant="subheading">Please, sign-in</Typography>
         <form
           className={classes.form}
           onSubmit={event => this.handleSubmit(event)}
@@ -195,7 +217,7 @@ class Form extends React.Component {
               className={classes.submit}
               disabled={!state.formValid}
             >
-              Entrar
+              Sign-in
             </Button>
           </Grid>
           <Grid item xs={12}>

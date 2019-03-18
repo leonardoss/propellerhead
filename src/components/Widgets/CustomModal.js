@@ -32,47 +32,49 @@ class CustomModal extends Component {
     const { classes } = this.props;
     return (
       <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={this.props.openModal}
-          onClose={this.props.handleClose}
-        >
-          <div className={classes.modal}>
-            <form noValidate autoComplete="off">
-              <Typography variant="title" id="modal-title">Insert a new card</Typography>
-              <Divider />
-              <TextField
-                id="multiline-static"
-                label="type"
-                multiline
-                rows="4"
-                defaultValue=""
-                margin="normal"
-                fullWidth
-                name="textCard"
-                value={this.props.text}
-                onChange={this.props.handleInputChange}
-              />
-              <br />
-              <br />
-              <br />
-              <Button
-                variant="contained"
-                color="secondary"
-                className={classes.button}
-                onClick={this.props.onClickSave}
-              >
-                Save
-              </Button>
-            </form>
-          </div>
-        </Modal>
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={this.props.openModal}
+        onClose={this.props.handleClose}
+      >
+        <div className={classes.modal}>
+          <form noValidate autoComplete="off">
+            <Typography variant="title" id="modal-title">
+              Create a new project
+            </Typography>
+            <Divider />
+            <TextField
+              id="multiline-static"
+              label="Project name"
+              multiline
+              rows="4"
+              defaultValue=""
+              margin="normal"
+              fullWidth
+              name="newProjectTitle"
+              value={this.props.newProjectTitle}
+              onChange={this.props.handleInputChange}
+            />
+            <br />
+            <br />
+            <br />
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+              onClick={this.props.onClickSave}
+            >
+              Save
+            </Button>
+          </form>
+        </div>
+      </Modal>
     );
   }
 }
 
 CustomModal.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(CustomModal);

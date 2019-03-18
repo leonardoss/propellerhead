@@ -27,7 +27,7 @@
   },
   "scripts": {
     "webpack-dev": "webpack-dev-server --mode development --open --hot",
-    "webpack": "webpack",
+    "webpack": "webpack --mode='development'",
     "dev": "npm run webpack-dev && nodemon --exec babel-node -- bin/www",
     "start": "npm run webpack && nodemon --exec babel-node -- bin/www",
     "build": "react-scripts build",

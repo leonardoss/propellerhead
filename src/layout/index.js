@@ -27,9 +27,11 @@ class Layout extends React.Component {
     history.push(route);
   }
   render() {
-    const { classes } = this.props;
-    const { children, user, authSignOut } = this.props;
-    const initials = user ? user.displayName.slice(0, 2).toUpperCase() : false;
+    const { classes, children, user, authSignOut } = this.props;
+    const initials =
+      user && user.displayName
+        ? user.displayName.slice(0, 2).toUpperCase()
+        : false;
     return (
       <Grid container className="main" spacing={0}>
         <Grid item xs={12}>
